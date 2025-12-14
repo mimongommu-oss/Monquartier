@@ -1,0 +1,8 @@
+{
+  "name": "Mon Quartier",
+  "description": "Application de gestion communautaire : Gouvernance, Finances, Travaux et Sécurité.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

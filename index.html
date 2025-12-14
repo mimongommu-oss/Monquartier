@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover" />
+    
+    <!-- PWA Setup -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Mon Quartier" />
+    
+    <title>Mon Quartier - Portail Citoyen</title>
+    <meta name="description" content="Gérez votre vie de quartier : Finances, Votes, Sécurité et Entraide." />
+
+    <!-- Google Fonts: Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ['Rubik', 'sans-serif'],
+          },
+          extend: {
+            colors: {
+              brand: {
+                50: '#eff6ff',
+                100: '#dbeafe',
+                400: '#60a5fa',
+                500: '#3b82f6', 
+                600: '#2563eb',
+                700: '#1d4ed8',
+                900: '#1e3a8a',
+              },
+              accent: {
+                yellow: '#fbbf24', 
+                purple: '#8b5cf6', 
+                green: '#34d399', 
+                red: '#f87171', 
+              },
+              dark: {
+                900: '#0f172a',
+                800: '#1e293b',
+              }
+            },
+            boxShadow: {
+              'game': '0 4px 0 0 rgba(0,0,0,0.1)',
+              'game-lg': '0 8px 0 0 rgba(0,0,0,0.1)',
+              'game-btn': '0 4px 0 0 rgba(0,0,0,0.2)',
+              'game-hover': '0 6px 0 0 rgba(0,0,0,0.2)',
+            },
+            screens: {
+              'xs': '375px',
+            },
+            padding: {
+              'safe-top': 'env(safe-area-inset-top)',
+              'safe-bottom': 'env(safe-area-inset-bottom)',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overscroll-behavior: none;
+      }
+      
+      body {
+        font-family: 'Rubik', sans-serif;
+        background-color: #e2e8f0;
+        -webkit-tap-highlight-color: transparent;
+        overflow: hidden;
+      }
+      
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      @keyframes pop-in {
+        0% { transform: scale(0.95); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      .animate-pop {
+        animation: pop-in 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+
+      .btn-press:active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 0 rgba(0,0,0,0.1) !important;
+      }
+
+      .snap-y-mandatory { scroll-snap-type: y mandatory; }
+      .snap-x-mandatory { scroll-snap-type: x mandatory; }
+      .snap-center { scroll-snap-align: center; }
+      
+      /* Safe Area Utilities for iPhone X+ */
+      .pt-safe-top { padding-top: env(safe-area-inset-top); }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+      .top-safe-top { top: env(safe-area-inset-top); }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "recharts": "https://esm.sh/recharts@^3.5.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.39.3",
+    "qrcode": "https://esm.sh/qrcode@1.5.3"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-200 text-slate-900 antialiased select-none fixed inset-0">
+    <div id="root" class="h-full w-full"></div>
+  </body>
+</html>
