@@ -65,8 +65,13 @@ export function useData<T extends { id: string }>(
         if (isMounted) {
           const errorMessage = err.message || JSON.stringify(err);
           // Suppression du bruit dans la console si la table n'existe pas encore (mode dev/mock)
-          if (errorMessage.includes('Could not find the table') || errorMessage.includes('does not exist')) {
-            console.warn(`[useData] Table '${tableName}' introuvable sur Supabase. Utilisation des données mockées.`);
+          if (
+            errorMessage.includes('Could not find the table') || 
+            errorMessage.includes('does not exist') || 
+            errorMessage.includes('relation')
+          ) {
+            console.warn(`[useData] Table '${tableName}' introuvable ou erreur schéma. Utilisation des données mockées.`);
+            // On ne set pas d'erreur critique pour laisser l'UI afficher les mocks
           } else {
             console.error(`[${tableName}] Fetch Error:`, errorMessage);
             setError(errorMessage);
@@ -100,8 +105,6 @@ export function useData<T extends { id: string }>(
 
             if (payload.eventType === 'INSERT') {
               const newItem = payload.new as T;
-              // Ajout en début de liste (hypothèse: trié par date DESC souvent)
-              // Idéalement on respecterait 'orderBy' mais c'est complexe en front pur
               const newData = [newItem, ...currentData];
               setData(newData);
               dataRef.current = newData;
